@@ -31,7 +31,7 @@ public class Manager: NSObject {
     let apiBase = "https://ssl.google-analytics.com/collect"
     let GAClientIDKey = "GAClientIDKey"
     
-    init(trackingID: String, userID: String?) {
+    public init(trackingID: String, userID: String?) {
         self.trackingID = trackingID
         self.userID = userID
         super.init()
@@ -59,17 +59,17 @@ public class Manager: NSObject {
         return "GoogleAnalytics/2.0 (Macintosh; Intel \(productName) \(productVersion); \(language)-\(country))"
     }
     
-    func trackPageview(viewName: String) {
+    public func trackPageview(viewName: String) {
         let hit = ScreenviewHit(viewName: viewName)
         sendHit(hit)
     }
     
-    func trackEvent(#category: String, action: String, label: String?, value: String?) {
+    public func trackEvent(#category: String, action: String, label: String?, value: String?) {
         let hit = EventHit(category: category, action: action, label: label, value: value)
         sendHit(hit)
     }
     
-    private func sendHit(hit: Hit) {
+    func sendHit(hit: Hit) {
         let hitParams = hit.params()
         let params = defaultParams().merge(hitParams)
         requestManager.request(.POST, apiBase, parameters: params)
@@ -78,7 +78,7 @@ public class Manager: NSObject {
             }
     }
     
-    private func defaultParams() -> [String: String] {
+    func defaultParams() -> [String: String] {
         var params: [String: String] = [
             "v": version(),
             "tid": trackingID,
