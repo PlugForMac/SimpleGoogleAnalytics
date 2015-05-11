@@ -27,13 +27,15 @@ extension Dictionary /* <KeyType, ValueType> */ {
 public class Manager: NSObject {
     let trackingID: String
     let userID: String?
-    let requestManager: Alamofire.Manager! = nil
     let apiBase = "https://ssl.google-analytics.com/collect"
     let GAClientIDKey = "GAClientIDKey"
+    
+    var requestManager: Alamofire.Manager!
     
     public init(trackingID: String, userID: String?) {
         self.trackingID = trackingID
         self.userID = userID
+        
         super.init()
 
         setupRequestManager()
@@ -46,7 +48,7 @@ public class Manager: NSObject {
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.HTTPAdditionalHeaders = defaultHeaders
         
-        let manager = Alamofire.Manager(configuration: configuration)
+        self.requestManager = Alamofire.Manager(configuration: configuration)
     }
     
     func userAgent() -> String {

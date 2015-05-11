@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA4D18FD1B0128B10043A040 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4D18FC1B0128B10043A040 /* Alamofire.framework */; };
+		FA4D19051B012B790043A040 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA4D18FC1B0128B10043A040 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA5B33A11AFF3409009F2F95 /* SimpleGoogleAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = FA5B33A01AFF3409009F2F95 /* SimpleGoogleAnalytics.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA5B33A71AFF3409009F2F95 /* SimpleGoogleAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA5B339B1AFF3409009F2F95 /* SimpleGoogleAnalytics.framework */; };
 		FA5B33AE1AFF3409009F2F95 /* SimpleGoogleAnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5B33AD1AFF3409009F2F95 /* SimpleGoogleAnalyticsTests.swift */; };
@@ -14,7 +16,6 @@
 		FA5B33BC1AFF34AE009F2F95 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FA5B33BB1AFF34AE009F2F95 /* README.md */; };
 		FA5B33BE1AFF34B4009F2F95 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = FA5B33BD1AFF34B4009F2F95 /* LICENSE */; };
 		FA5B33C01AFF3963009F2F95 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = FA5B33BF1AFF3963009F2F95 /* Cartfile */; };
-		FA5B33C21AFF41C2009F2F95 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA5B33C11AFF41C2009F2F95 /* Alamofire.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,7 +28,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		FA4D19041B012B6F0043A040 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FA4D19051B012B790043A040 /* Alamofire.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		FA4D18FC1B0128B10043A040 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/Mac/Alamofire.framework; sourceTree = SOURCE_ROOT; };
 		FA5B339B1AFF3409009F2F95 /* SimpleGoogleAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SimpleGoogleAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA5B339F1AFF3409009F2F95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA5B33A01AFF3409009F2F95 /* SimpleGoogleAnalytics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimpleGoogleAnalytics.h; sourceTree = "<group>"; };
@@ -38,7 +53,6 @@
 		FA5B33BB1AFF34AE009F2F95 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FA5B33BD1AFF34B4009F2F95 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		FA5B33BF1AFF3963009F2F95 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
-		FA5B33C11AFF41C2009F2F95 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,7 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA5B33C21AFF41C2009F2F95 /* Alamofire.framework in Frameworks */,
+				FA4D18FD1B0128B10043A040 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,13 +75,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA4D18F91B0124A00043A040 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA4D18FC1B0128B10043A040 /* Alamofire.framework */,
+			);
+			name = Frameworks;
+			path = Source;
+			sourceTree = "<group>";
+		};
 		FA5B33911AFF3409009F2F95 = {
 			isa = PBXGroup;
 			children = (
-				FA5B33C11AFF41C2009F2F95 /* Alamofire.framework */,
 				FA5B339D1AFF3409009F2F95 /* Source */,
 				FA5B33AA1AFF3409009F2F95 /* Tests */,
 				FA5B339C1AFF3409009F2F95 /* Products */,
+				FA4D18F91B0124A00043A040 /* Frameworks */,
 				FA5B33BB1AFF34AE009F2F95 /* README.md */,
 				FA5B33BD1AFF34B4009F2F95 /* LICENSE */,
 				FA5B33BF1AFF3963009F2F95 /* Cartfile */,
@@ -157,6 +180,7 @@
 				FA5B33A21AFF3409009F2F95 /* Sources */,
 				FA5B33A31AFF3409009F2F95 /* Frameworks */,
 				FA5B33A41AFF3409009F2F95 /* Resources */,
+				FA4D19041B012B6F0043A040 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -338,7 +362,7 @@
 		FA5B33B21AFF3409009F2F95 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -363,7 +387,7 @@
 		FA5B33B31AFF3409009F2F95 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -391,6 +415,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -409,6 +434,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
