@@ -119,15 +119,15 @@ public class Manager: NSObject {
     }
     
     private func appName() -> String {
-        return NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleNameKey as String) as! String
+        return NSBundle(forClass: self.dynamicType).objectForInfoDictionaryKey(kCFBundleNameKey as String) as! String
     }
     
     private func appVersion() -> String {
-        return NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as! String
+        return NSBundle(forClass: self.dynamicType).objectForInfoDictionaryKey(kCFBundleVersionKey as String) as! String
     }
     
     private func appID() -> String {
-        return NSBundle.mainBundle().bundleIdentifier!
+        return NSBundle(forClass: self.dynamicType).bundleIdentifier!
     }
     
     private func screenResolution() -> String {

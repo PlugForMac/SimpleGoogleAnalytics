@@ -23,4 +23,18 @@ class SimpleGoogleAnalyticsTests: XCTestCase {
         let tracker = SimpleGoogleAnalytics.Manager(trackingID: "UA-11111111-1", userID: nil)
         XCTAssertNotNil(tracker)
     }
+    
+    func testTrackPageview() {
+        // Just running to test for exceptions
+        let tracker = SimpleGoogleAnalytics.Manager(trackingID: "UA-11111111-1", userID: nil)
+        tracker.trackPageview("Test")
+        XCTAssertNotNil(tracker)
+    }
+    
+    func testTrackEvent() {
+        // Just running to test for exceptions
+        let tracker = SimpleGoogleAnalytics.Manager(trackingID: "UA-11111111-1", userID: nil)
+        tracker.trackEvent(category: "Button", action: "Click", label: "Test", value: nil)
+        XCTAssertNotNil(tracker)
+    }
 }
