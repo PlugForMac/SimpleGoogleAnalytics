@@ -15,3 +15,26 @@ analytics.trackPageview("Main Window")
 // Track button click (or any other event)
 analytics.trackEvent(category: "Button", action: "Click", label: "Sign In", value: nil)
 ```
+
+## Installation
+
+### Carthage
+
+Carthage is a decentralized dependency manager that automates the process of adding frameworks to your Cocoa application.
+
+You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
+
+```bash
+$ brew update
+$ brew install carthage
+```
+
+To integrate SimpleGoogleAnalytics into your Xcode project using Carthage, specify it in your `Cartfile`:
+
+```ogdl
+github "PlugForMac/SimpleGoogleAnalytics" ~> 0.1.0
+```
+
+### CocoaPods
+
+Please create an issue if you'd like CocoaPods support.
