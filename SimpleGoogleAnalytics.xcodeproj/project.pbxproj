@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA107AA11B0459A0006FA015 /* Dictionary+merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA107AA01B0459A0006FA015 /* Dictionary+merge.swift */; };
 		FA4D18FD1B0128B10043A040 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4D18FC1B0128B10043A040 /* Alamofire.framework */; };
 		FA4D19051B012B790043A040 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA4D18FC1B0128B10043A040 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA5B33A11AFF3409009F2F95 /* SimpleGoogleAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = FA5B33A01AFF3409009F2F95 /* SimpleGoogleAnalytics.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -42,6 +43,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FA107AA01B0459A0006FA015 /* Dictionary+merge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+merge.swift"; sourceTree = "<group>"; };
 		FA4D18FC1B0128B10043A040 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/Mac/Alamofire.framework; sourceTree = SOURCE_ROOT; };
 		FA5B339B1AFF3409009F2F95 /* SimpleGoogleAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SimpleGoogleAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA5B339F1AFF3409009F2F95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -75,6 +77,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA107A9E1B045979006FA015 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FA107AA01B0459A0006FA015 /* Dictionary+merge.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		FA4D18F91B0124A00043A040 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +121,7 @@
 			children = (
 				FA5B33A01AFF3409009F2F95 /* SimpleGoogleAnalytics.h */,
 				FA5B33B71AFF3422009F2F95 /* SimpleGoogleAnalytics.swift */,
+				FA107A9E1B045979006FA015 /* Extensions */,
 				FA5B339E1AFF3409009F2F95 /* Supporting Files */,
 			);
 			path = Source;
@@ -252,6 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA107AA11B0459A0006FA015 /* Dictionary+merge.swift in Sources */,
 				FA5B33B81AFF3422009F2F95 /* SimpleGoogleAnalytics.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -362,7 +374,7 @@
 		FA5B33B21AFF3409009F2F95 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -388,7 +400,7 @@
 		FA5B33B31AFF3409009F2F95 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;

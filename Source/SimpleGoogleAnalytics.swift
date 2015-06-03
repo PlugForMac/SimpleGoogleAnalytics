@@ -9,21 +9,6 @@
 import Foundation
 import Alamofire
 
-// MARK: - Dictionary#merge
-
-extension Dictionary /* <KeyType, ValueType> */ {
-    func merge(dictionary: Dictionary<Key, Value>) -> Dictionary {
-        var newDictionary = self
-        for key in dictionary.keys {
-            if newDictionary[key] != nil { continue }
-            newDictionary[key] = dictionary[key]
-        }
-        return newDictionary
-    }
-}
-
-// MARK: -
-
 public class Manager: NSObject {
     let trackingID: String
     let userID: String?
@@ -76,7 +61,9 @@ public class Manager: NSObject {
         let params = defaultParams().merge(hitParams)
         requestManager.request(.POST, apiBase, parameters: params)
             .response { (_, _, _, error) in
-                println(error)
+                if error != nil {
+                    println(error)
+                }
             }
     }
     
