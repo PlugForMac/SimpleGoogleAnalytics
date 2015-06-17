@@ -56,8 +56,13 @@ public class Manager: NSObject {
         sendHit(hit)
     }
     
+    public func trackException(#description: String, fatal: Bool?) {
+        let hit = ExceptionHit(description: description, fatal: fatal)
+        sendHit(hit)
+    }
+    
     func sendHit(hit: Hit) {
-        let hitParams = hit.params()
+        let hitParams = hit.params
         let params = defaultParams().merge(hitParams)
         requestManager.request(.POST, apiBase, parameters: params)
             .response { (_, _, _, error) in
@@ -140,12 +145,12 @@ public class Manager: NSObject {
 // MARK: - Hit Protocol
 
 protocol Hit {
-    func description() -> String
-    func params() -> [String: String]
+     var description: String { get }
+     var params: [String: String] { get }
 }
 
 public struct ScreenviewHit: Hit {
-    var viewName: String
+    let viewName: String
     var contentDescription: String {
         return viewName
     }
@@ -154,11 +159,11 @@ public struct ScreenviewHit: Hit {
         self.viewName = viewName
     }
     
-    func description() -> String {
+    var description: String {
         return "<ScreenviewHit viewName: \(viewName)>"
     }
     
-    func params() -> [String: String] {
+    var params: [String: String] {
         return [
             "t": "screenview",
             "cd": contentDescription,
@@ -167,10 +172,10 @@ public struct ScreenviewHit: Hit {
 }
 
 public struct EventHit: Hit {
-    var category: String
-    var action: String
-    var label: String?
-    var value: String?
+    let category: String
+    let action: String
+    let label: String?
+    let value: String?
     
     init(category: String, action: String, label: String?, value: String?) {
         self.category = category
@@ -179,20 +184,49 @@ public struct EventHit: Hit {
         self.value = value
     }
     
-    func description() -> String {
+    var description: String {
         return "<EventHit category: \(category), action: \(action), label: \(label), value: \(value)>"
     }
     
-    func params() -> [String: String] {
+    var params: [String: String] {
         var params = [String: String]()
         params["t"] = "event"
         params["ec"] = category
         params["ea"] = action
         if label != nil {
-            params["el"] = label
+            params["el"] = label!
         }
         if value != nil {
-            params["ev"] = value
+            params["ev"] = value!
+        }
+        return params
+    }
+}
+
+public struct ExceptionHit: Hit {
+    let description: String
+    let fatal: Bool?
+    
+    var fatalString: String? {
+        if fatal == nil { return nil }
+        if fatal! {
+            return "1"
+        } else {
+            return "0"
+        }
+    }
+    
+    init(description: String, fatal: Bool?) {
+        self.description = description
+        self.fatal = fatal
+    }
+    
+    var params: [String: String] {
+        var params = [String: String]()
+        params["t"] = "exception"
+        params["exd"] = description
+        if fatal != nil {
+            params["exf"] = fatalString!
         }
         return params
     }

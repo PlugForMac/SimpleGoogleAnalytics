@@ -209,6 +209,7 @@
 		FA5B33921AFF3409009F2F95 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = Plug;
 				TargetAttributes = {
