@@ -89,7 +89,6 @@ public class Manager: NSObject {
         if let uid = userID {
             params["uid"] = uid
         }
-        println(params)
         return params
     }
     
