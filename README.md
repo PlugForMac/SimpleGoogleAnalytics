@@ -25,6 +25,12 @@ analytics.trackPageview("Main Window")
 analytics.trackEvent(category: "Button", action: "Click", label: "Sign In", value: nil)
 ```
 
+### Exceptions
+
+```swift
+analytics.trackException(description: "Exception", fatal: true)
+```
+
 ## Installation
 
 ### Carthage
