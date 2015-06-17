@@ -10,25 +10,25 @@ Thanks to Coppertio's [AnalyticEverything](https://github.com/Coppertino/Analyti
 ### Setup
 
 ```swift
-var analytics = SimpleGoogleAnalytics(trackingID: "UA-XXXXXXXX-X")
+var tracker = SimpleGoogleAnalytics.Manager(trackingID: "UA-XXXXXXXX-X", appBundle: NSBundle.mainBundle(), userID: nil)
 ```
 
 ### Pageviews
 
 ```swift
-analytics.trackPageview("Main Window")
+tracker.trackPageview("Main Window")
 ```
 
 ### Events
 
 ```swift
-analytics.trackEvent(category: "Button", action: "Click", label: "Sign In", value: nil)
+tracker.trackEvent(category: "Button", action: "Click", label: "Sign In", value: nil)
 ```
 
 ### Exceptions
 
 ```swift
-analytics.trackException(description: "Exception", fatal: true)
+tracker.trackException(description: "Exception", fatal: true)
 ```
 
 ## Installation
