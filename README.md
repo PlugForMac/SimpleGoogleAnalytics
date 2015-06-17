@@ -10,7 +10,7 @@ Thanks to Coppertio's [AnalyticEverything](https://github.com/Coppertino/Analyti
 ### Setup
 
 ```swift
-var tracker = SimpleGoogleAnalytics.Manager(trackingID: "UA-XXXXXXXX-X", appBundle: NSBundle.mainBundle(), userID: nil)
+let tracker = SimpleGoogleAnalytics.Manager(trackingID: "UA-XXXXXXXX-X", appBundle: NSBundle.mainBundle(), userID: nil)
 ```
 
 ### Pageviews
