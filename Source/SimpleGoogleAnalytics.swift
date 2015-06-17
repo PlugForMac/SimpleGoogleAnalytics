@@ -11,14 +11,16 @@ import Alamofire
 
 public class Manager: NSObject {
     let trackingID: String
+    let appBundle: NSBundle
     let userID: String?
     let apiBase = "https://ssl.google-analytics.com/collect"
     let GAClientIDKey = "GAClientIDKey"
     
     var requestManager: Alamofire.Manager!
     
-    public init(trackingID: String, userID: String?) {
+    public init(trackingID: String, appBundle: NSBundle, userID: String?) {
         self.trackingID = trackingID
+        self.appBundle = appBundle
         self.userID = userID
         
         super.init()
@@ -87,6 +89,7 @@ public class Manager: NSObject {
         if let uid = userID {
             params["uid"] = uid
         }
+        println(params)
         return params
     }
     
@@ -111,15 +114,15 @@ public class Manager: NSObject {
     }
     
     private func appName() -> String {
-        return NSBundle(forClass: self.dynamicType).objectForInfoDictionaryKey(kCFBundleNameKey as String) as! String
+        return appBundle.objectForInfoDictionaryKey(kCFBundleNameKey as String) as! String
     }
     
     private func appVersion() -> String {
-        return NSBundle(forClass: self.dynamicType).objectForInfoDictionaryKey(kCFBundleVersionKey as String) as! String
+        return appBundle.objectForInfoDictionaryKey(kCFBundleVersionKey as String) as! String
     }
     
     private func appID() -> String {
-        return NSBundle(forClass: self.dynamicType).bundleIdentifier!
+        return appBundle.bundleIdentifier!
     }
     
     private func screenResolution() -> String {
