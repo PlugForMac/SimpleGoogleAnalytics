@@ -53,12 +53,12 @@ public class Manager: NSObject {
         sendHit(hit)
     }
     
-    public func trackEvent(#category: String, action: String, label: String?, value: String?) {
+    public func trackEvent(category category: String, action: String, label: String?, value: String?) {
         let hit = EventHit(category: category, action: action, label: label, value: value)
         sendHit(hit)
     }
     
-    public func trackException(#description: String, fatal: Bool?) {
+    public func trackException(description description: String, fatal: Bool?) {
         let hit = ExceptionHit(description: description, fatal: fatal)
         sendHit(hit)
     }
@@ -69,7 +69,7 @@ public class Manager: NSObject {
         requestManager.request(.POST, apiBase, parameters: params)
             .response { (_, _, _, error) in
                 if error != nil {
-                    println(error)
+                    print(error)
                 }
             }
     }
@@ -107,8 +107,8 @@ public class Manager: NSObject {
     }
     
     private func generateClientID() -> String {
-        var newUUID = CFUUIDCreate(nil)
-        var string = CFUUIDCreateString(nil, newUUID) as String
+        let newUUID = CFUUIDCreate(nil)
+        let string = CFUUIDCreateString(nil, newUUID) as String
         return string
     }
     
@@ -137,7 +137,7 @@ public class Manager: NSObject {
     }
     
     private func userLanguage() -> String {
-        let lang = NSLocale.preferredLanguages()[0] as! String
+        let lang = NSLocale.preferredLanguages()[0] 
         let identifer = lang == "en" ? "en_US" : lang
         let locale = NSLocale(localeIdentifier: identifer)
         return "\(locale.objectForKey(NSLocaleLanguageCode)!)-\(locale.objectForKey(NSLocaleCountryCode)!)"

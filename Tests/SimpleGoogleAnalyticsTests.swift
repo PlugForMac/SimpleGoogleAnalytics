@@ -20,21 +20,28 @@ class SimpleGoogleAnalyticsTests: XCTestCase {
     }
     
     func testSetup() {
-        let tracker = SimpleGoogleAnalytics.Manager(trackingID: "UA-11111111-1", userID: nil)
+        let tracker = SimpleGoogleAnalytics.Manager(trackingID: "UA-11111111-1", appBundle: NSBundle(forClass: SimpleGoogleAnalyticsTests.self), userID: nil)
         XCTAssertNotNil(tracker)
     }
     
     func testTrackPageview() {
         // Just running to test for exceptions
-        let tracker = SimpleGoogleAnalytics.Manager(trackingID: "UA-11111111-1", userID: nil)
+        let tracker = SimpleGoogleAnalytics.Manager(trackingID: "UA-11111111-1", appBundle: NSBundle(forClass: SimpleGoogleAnalyticsTests.self),userID: nil)
         tracker.trackPageview("Test")
         XCTAssertNotNil(tracker)
     }
     
     func testTrackEvent() {
         // Just running to test for exceptions
-        let tracker = SimpleGoogleAnalytics.Manager(trackingID: "UA-11111111-1", userID: nil)
+        let tracker = SimpleGoogleAnalytics.Manager(trackingID: "UA-11111111-1", appBundle: NSBundle(forClass: SimpleGoogleAnalyticsTests.self),userID: nil)
         tracker.trackEvent(category: "Button", action: "Click", label: "Test", value: nil)
+        XCTAssertNotNil(tracker)
+    }
+    
+    func testTrackException() {
+        // Just running to test for exceptions
+        let tracker = SimpleGoogleAnalytics.Manager(trackingID: "UA-11111111-1", appBundle: NSBundle(forClass: SimpleGoogleAnalyticsTests.self),userID: nil)
+        tracker.trackException(description: "Exception", fatal: true)
         XCTAssertNotNil(tracker)
     }
 }
