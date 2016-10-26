@@ -9,67 +9,67 @@
 import Foundation
 import Alamofire
 
-public class Manager: NSObject {
+open class Manager: NSObject {
     let trackingID: String
-    let appBundle: NSBundle
+    let appBundle: Bundle
     let userID: String?
     let apiBase = "https://ssl.google-analytics.com/collect"
     let GAClientIDKey = "GAClientIDKey"
     
-    var requestManager: Alamofire.Manager!
+    var sessionManager: Alamofire.SessionManager!
     
-    public init(trackingID: String, appBundle: NSBundle, userID: String?) {
+    public init(trackingID: String, appBundle: Bundle, userID: String?) {
         self.trackingID = trackingID
         self.appBundle = appBundle
         self.userID = userID
         
         super.init()
 
-        setupRequestManager()
+        setupSessionManager()
     }
     
-    func setupRequestManager() {
-        var defaultHeaders = Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders ?? [:]
+    func setupSessionManager() {
+        var defaultHeaders = Alamofire.SessionManager.defaultHTTPHeaders
         defaultHeaders["User-Agent"] = userAgent()
         
-        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-        configuration.HTTPAdditionalHeaders = defaultHeaders
+        let configuration = URLSessionConfiguration.default
+        configuration.httpAdditionalHeaders = defaultHeaders
         
-        self.requestManager = Alamofire.Manager(configuration: configuration)
+        self.sessionManager = Alamofire.SessionManager(configuration: configuration)
     }
     
     func userAgent() -> String {
         let osInfo = NSDictionary(contentsOfFile: "/System/Library/CoreServices/SystemVersion.plist")!
-        let currentLocale = NSLocale.autoupdatingCurrentLocale()
+        let currentLocale = Locale.autoupdatingCurrent
         let productName = osInfo["ProductName"] as! String
-        let productVersion = (osInfo["ProductVersion"] as! String).stringByReplacingOccurrencesOfString(".", withString: "_")
-        let language = currentLocale.objectForKey(NSLocaleLanguageCode) as! String
-        let country = currentLocale.objectForKey(NSLocaleCountryCode) as! String
+        let productVersion = (osInfo["ProductVersion"] as! String).replacingOccurrences(of: ".", with: "_")
+        let language = (currentLocale as NSLocale).object(forKey: NSLocale.Key.languageCode) as! String
+        let country = (currentLocale as NSLocale).object(forKey: NSLocale.Key.countryCode) as! String
         return "GoogleAnalytics/2.0 (Macintosh; Intel \(productName) \(productVersion); \(language)-\(country))"
     }
     
-    public func trackPageview(viewName: String) {
+    open func trackPageview(_ viewName: String) {
         let hit = ScreenviewHit(viewName: viewName)
         sendHit(hit)
     }
     
-    public func trackEvent(category category: String, action: String, label: String?, value: String?) {
+    open func trackEvent(category: String, action: String, label: String?, value: String?) {
         let hit = EventHit(category: category, action: action, label: label, value: value)
         sendHit(hit)
     }
     
-    public func trackException(description description: String, fatal: Bool?) {
+    open func trackException(description: String, fatal: Bool?) {
         let hit = ExceptionHit(description: description, fatal: fatal)
         sendHit(hit)
     }
     
-    func sendHit(hit: Hit) {
+    func sendHit(_ hit: Hit) {
         let hitParams = hit.params
         let params = defaultParams().merge(hitParams)
-        requestManager.request(.POST, apiBase, parameters: params)
-            .response { (_, _, _, error) in
-                if error != nil {
-                    print(error)
+        sessionManager.request(apiBase, method: .post, parameters: params)
+            .response { response in
+                if response.error != nil {
+                    print(response.error)
                 }
             }
     }
@@ -92,53 +92,53 @@ public class Manager: NSObject {
         return params
     }
     
-    private func version() -> String {
+    fileprivate func version() -> String {
         return "1"
     }
     
-    private func clientID() -> String {
-        if let UUID = NSUserDefaults.standardUserDefaults().stringForKey(GAClientIDKey) {
+    fileprivate func clientID() -> String {
+        if let UUID = UserDefaults.standard.string(forKey: GAClientIDKey) {
             return UUID
         } else {
             let newUUID = generateClientID()
-            NSUserDefaults.standardUserDefaults().setObject(newUUID, forKey: GAClientIDKey)
+            UserDefaults.standard.set(newUUID, forKey: GAClientIDKey)
             return newUUID
         }
     }
     
-    private func generateClientID() -> String {
+    fileprivate func generateClientID() -> String {
         let newUUID = CFUUIDCreate(nil)
         let string = CFUUIDCreateString(nil, newUUID) as String
         return string
     }
     
-    private func appName() -> String {
-        return appBundle.objectForInfoDictionaryKey(kCFBundleNameKey as String) as! String
+    fileprivate func appName() -> String {
+        return appBundle.object(forInfoDictionaryKey: kCFBundleNameKey as String) as! String
     }
     
-    private func appVersion() -> String {
-        return appBundle.objectForInfoDictionaryKey(kCFBundleVersionKey as String) as! String
+    fileprivate func appVersion() -> String {
+        return appBundle.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as! String
     }
     
-    private func appID() -> String {
+    fileprivate func appID() -> String {
         return appBundle.bundleIdentifier!
     }
     
-    private func screenResolution() -> String {
-        let size = NSScreen.mainScreen()!.deviceDescription[NSDeviceSize]!.sizeValue
-        let width = Int(size.width)
-        let height = Int(size.height)
+    fileprivate func screenResolution() -> String {
+        let size = (NSScreen.main()!.deviceDescription[NSDeviceSize]! as AnyObject).sizeValue
+        let width = Int((size?.width)!)
+        let height = Int((size?.height)!)
         return "\(width)x\(height)"
     }
     
-    private func screenColors() -> String {
-        let bits = NSBitsPerPixelFromDepth(NSScreen.mainScreen()!.depth)
+    fileprivate func screenColors() -> String {
+        let bits = NSBitsPerPixelFromDepth(NSScreen.main()!.depth)
         return "\(bits)-bit"
     }
     
-    private func userLanguage() -> String {
-        let locale = NSLocale.currentLocale()
-        return "\(locale.objectForKey(NSLocaleLanguageCode)!)-\(locale.objectForKey(NSLocaleCountryCode)!)"
+    fileprivate func userLanguage() -> String {
+        let locale = Locale.current
+        return "\((locale as NSLocale).object(forKey: NSLocale.Key.languageCode)!)-\((locale as NSLocale).object(forKey: NSLocale.Key.countryCode)!)"
     }
 }
 
