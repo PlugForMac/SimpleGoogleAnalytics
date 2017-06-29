@@ -69,7 +69,7 @@ open class Manager: NSObject {
         sessionManager.request(apiBase, method: .post, parameters: params)
             .response { response in
                 if response.error != nil {
-                    print(response.error)
+                    print(response.error!)
                 }
             }
     }
@@ -125,14 +125,15 @@ open class Manager: NSObject {
     }
     
     fileprivate func screenResolution() -> String {
-        let size = (NSScreen.main()!.deviceDescription[NSDeviceSize]! as AnyObject).sizeValue
+        let size = (NSScreen.main!.deviceDescription[NSDeviceDescriptionKey.size]! as AnyObject).sizeValue
+
         let width = Int((size?.width)!)
         let height = Int((size?.height)!)
         return "\(width)x\(height)"
     }
     
     fileprivate func screenColors() -> String {
-        let bits = NSBitsPerPixelFromDepth(NSScreen.main()!.depth)
+        let bits = NSScreen.main!.depth.bitsPerPixel
         return "\(bits)-bit"
     }
     
@@ -185,7 +186,7 @@ public struct EventHit: Hit {
     }
     
     var description: String {
-        return "<EventHit category: \(category), action: \(action), label: \(label), value: \(value)>"
+        return "<EventHit category: \(category), action: \(action), label: \(String(describing: label)), value: \(String(describing: value))>"
     }
     
     var params: [String: String] {
