@@ -9,6 +9,6 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/PlugForMac/SimpleGoogleAnalytics.git", :tag => s.version }
   s.source_files = 'Source/*.swift'
   s.requires_arc = true
-  s.dependency "Alamofire", "~> 4.4"
+  s.dependency "Alamofire", "~> 4.5"
 end
 
